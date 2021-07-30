@@ -1,0 +1,527 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "Exported by architect/package@6.2.1 on 2021-07-30T15:56:56.622Z",
+  "Resources": {
+    "ZeroScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/zero",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 5,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "ZeroScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "ZeroScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "ZeroScheduledLambda"
+          }
+        ]
+      }
+    },
+    "ZeroScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "ZeroScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "ZeroScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "TenScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/ten",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 11,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "TenScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "TenScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "TenScheduledLambda"
+          }
+        ]
+      }
+    },
+    "TenScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "TenScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "TenScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "TwentyScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/twenty",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 21,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "TwentyScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "TwentyScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "TwentyScheduledLambda"
+          }
+        ]
+      }
+    },
+    "TwentyScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "TwentyScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "TwentyScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "ThirtyScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/thirty",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 31,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "ThirtyScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "ThirtyScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "ThirtyScheduledLambda"
+          }
+        ]
+      }
+    },
+    "ThirtyScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "ThirtyScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "ThirtyScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "FourtyScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/fourty",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 41,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "FourtyScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "FourtyScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "FourtyScheduledLambda"
+          }
+        ]
+      }
+    },
+    "FourtyScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "FourtyScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "FourtyScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "FiftyScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/fifty",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 51,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "FiftyScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "FiftyScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "FiftyScheduledLambda"
+          }
+        ]
+      }
+    },
+    "FiftyScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "FiftyScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "FiftyScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "SixtyScheduledLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "index.handler",
+        "CodeUri": "/Users/brianleroux/Desktop/chase-time/src/scheduled/sixty",
+        "Runtime": "nodejs12.x",
+        "MemorySize": 1152,
+        "Timeout": 61,
+        "Environment": {
+          "Variables": {
+            "ARC_APP_NAME": "chase-time",
+            "ARC_CLOUDFORMATION": {
+              "Ref": "AWS::StackName"
+            },
+            "ARC_ENV": "staging",
+            "ARC_HTTP": "aws_proxy",
+            "ARC_ROLE": {
+              "Ref": "Role"
+            },
+            "NODE_ENV": "staging",
+            "SESSION_TABLE_NAME": "jwe"
+          }
+        },
+        "Role": {
+          "Fn::Sub": [
+            "arn:aws:iam::${AWS::AccountId}:role/${roleName}",
+            {
+              "roleName": {
+                "Ref": "Role"
+              }
+            }
+          ]
+        },
+        "Events": {}
+      }
+    },
+    "SixtyScheduledEvent": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "ScheduleExpression": "rate(1 minute)",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "SixtyScheduledLambda",
+                "Arn"
+              ]
+            },
+            "Id": "SixtyScheduledLambda"
+          }
+        ]
+      }
+    },
+    "SixtyScheduledPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "SixtyScheduledLambda"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "SixtyScheduledEvent",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "Role": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ArcGlobalPolicy",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents",
+                    "logs:DescribeLogStreams"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {}
+}
