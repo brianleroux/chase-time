@@ -1,6 +1,9 @@
 exports.handler = async function scheduled (event) {
-  setTimeout(function() { 
-    console.log('thirty')
-    console.log(JSON.stringify(event, null, 2))
-  }, 30*1000)
+  return new Promise(resolve=> {
+    setTimeout(function() { 
+      console.log('thirty')
+      console.log(JSON.stringify(event, null, 2))
+      resolve()
+    }, 30*1000)
+  })
 }
